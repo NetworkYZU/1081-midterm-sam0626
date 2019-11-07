@@ -8,6 +8,7 @@ package com.foodkoala.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import static java.util.Collections.list;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,6 +43,15 @@ public class AddOrderServlet extends HttpServlet {
         question 6 (10%)
         最後外轉址到 list.jsp
         */
+        String food=request.getParameter("food");
+        HttpSession session=request.getSession();
+        ArrayList foodlist=(ArrayList) session.getAttribute("foodlist");
+        if (foodlist==null){
+            foodlist=new ArrayList();
+            session.setAttribute("foodlist",foodlist);
+        }
+        foodlist.add(food);
+        response.sendRedirect("list.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
